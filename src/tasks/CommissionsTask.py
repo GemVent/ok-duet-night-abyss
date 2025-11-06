@@ -50,7 +50,6 @@ class CommissionsTask(BaseDNATask):
         return found
     
     def start_mission(self, timeout=10):
-        action_timeout = self.safe_get("action_timeout", timeout)
         box = self.box_of_screen_scaled(2560, 1440, 2100, 1272, 2145, 1316, name="start_mission", hcenter=True)
         start_time = time.time()
         while time.time() - start_time < 20:
@@ -61,6 +60,10 @@ class CommissionsTask(BaseDNATask):
                 break
         else:
             raise Exception("等待开始任务超时")
+        self.choose_drop_rate(timeout)
+        
+    def choose_drop_rate(self, timeout=10):
+        action_timeout = self.safe_get("action_timeout", timeout)
         self.choose_drop_rate_item()
         self.click_until(
             click_func=lambda: self.wait_click_start_btn(time_out=0.2, raise_if_not_found=False),
@@ -206,6 +209,9 @@ class CommissionsTask(BaseDNATask):
             self.give_up_mission()
             self.wait_until(self.in_team, time_out=30)
             return Mission.GIVE_UP
+        elif self.find_start_btn():
+            self.choose_drop_rate()
+            return Mission.START
         return False
 
 class QuickMoveTask:
