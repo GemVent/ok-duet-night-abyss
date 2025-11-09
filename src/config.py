@@ -97,8 +97,8 @@ config = {
     },
     'supported_resolution': {
         'ratio': '16:9', #支持的游戏分辨率
-        'min_size': (1280, 720), #支持的最低游戏分辨率
-        'resize_to': [(2560, 1440), (1920, 1080), (1600, 900), (1280, 720)], #可选, 如果非16:9自动缩放为 resize_to
+        'min_size': (1600, 900), #支持的最低游戏分辨率
+        'resize_to': [(2560, 1440), (1920, 1080), (1600, 900)], #可选, 如果非16:9自动缩放为 resize_to
     },
     'analytics': {
         'report_url': 'http://report.ok-script.cn:8080/report', #上报日活, 可选

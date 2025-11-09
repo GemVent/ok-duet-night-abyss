@@ -48,25 +48,22 @@ class CommissionsTask(BaseCombatTask):
         }
 
     def find_quit_btn(self, threshold = 0):
-        box = self.box_of_screen_scaled(2560, 1440, 798, 972, 855, 1026, name="quit_mission", hcenter=True)
-        return self.find_one("ingame_quit_icon", box=box, threshold=threshold)
+        return self.find_one("ingame_quit_icon", threshold=threshold)
 
     def find_continue_btn(self, threshold = 0):
-        box = self.box_of_screen_scaled(2560, 1440, 1600, 972, 1654, 1028, name="continue_mission", hcenter=True)
-        return self.find_one("ingame_continue_icon", box=box, threshold=threshold)
+        return self.find_one("ingame_continue_icon", threshold=threshold)
 
     def find_bottom_start_btn(self, threshold = 0):
-        return self.find_start_btn(threshold=threshold, box=self.box_of_screen_scaled(2560, 1440, 2100, 1272, 2145, 1316, name="start_mission", hcenter=True))
+        return self.find_start_btn(threshold=threshold, box=self.box_of_screen_scaled(2560, 1440, 2094, 1262, 2153, 1328, name="start_mission", hcenter=True))
 
     def find_letter_btn(self, threshold = 0):
-        return self.find_start_btn(threshold=threshold, box=self.box_of_screen_scaled(2560, 1440, 1630, 863, 1884, 914, name="letter_btn", hcenter=True))
+        return self.find_start_btn(threshold=threshold, box=self.box_of_screen_scaled(2560, 1440, 1630, 852, 1884, 920, name="letter_btn", hcenter=True))
 
     def find_letter_reward_btn(self, threshold = 0):
-        return self.find_start_btn(threshold=threshold, box=self.box_of_screen_scaled(2560, 1440, 1071, 1170, 1120, 1219, name="letter_reward_btn", hcenter=True))
+        return self.find_start_btn(threshold=threshold, box=self.box_of_screen_scaled(2560, 1440, 1071, 1160, 1120, 1230, name="letter_reward_btn", hcenter=True))
 
     def find_drop_rate_btn(self, threshold=0):
-        box = self.box_of_screen_scaled(2560, 1440, 1074, 943, 1120, 990, name="drop_rate", hcenter=True)
-        return self.find_start_btn(box=box, threshold=threshold)
+        return self.find_start_btn(threshold=threshold, box=self.box_of_screen_scaled(2560, 1440, 1060, 935, 1420, 1000, name="drop_rate_btn", hcenter=True))
 
     def find_esc_menu(self, threshold=0):
         return self.find_one("quit_big_icon", threshold=threshold)
@@ -91,10 +88,9 @@ class CommissionsTask(BaseCombatTask):
 
     def start_mission(self, timeout=10):
         action_timeout = self.safe_get("action_timeout", timeout)
-        box = self.box_of_screen_scaled(2560, 1440, 2100, 1272, 2145, 1316, name="start_mission", hcenter=True)
         start_time = time.time()
         while time.time() - start_time < action_timeout:
-            if btn := self.find_start_btn(box=box) or self.find_retry_btn():
+            if btn := self.find_bottom_start_btn() or self.find_retry_btn():
                 self.move_mouse_to_safe_position()
                 self.click_box(btn, after_sleep=0)
                 self.move_back_from_safe_position()
@@ -123,7 +119,7 @@ class CommissionsTask(BaseCombatTask):
 
     def give_up_mission(self, timeout=10):
         action_timeout = self.safe_get("action_timeout", timeout)
-        box = self.box_of_screen_scaled(2560, 1440, 1310, 788, 1352, 830, name="start_mission", hcenter=True)
+        box = self.box_of_screen_scaled(2560, 1440, 1301, 776, 1365, 841, name="give_up_mission", hcenter=True)
         self.open_in_mission_menu()
 
         self.wait_until(
@@ -160,10 +156,9 @@ class CommissionsTask(BaseCombatTask):
         action_timeout = self.safe_get("action_timeout", timeout)
         self.sleep(0.5)
         self.choose_drop_rate_item()
-        box = self.box_of_screen_scaled(2560, 1440, 1067, 940, 1415, 992, name="drop_rate_btn", hcenter=True)
         self.wait_until(
             condition=lambda: not self.find_drop_item(),
-            post_action=lambda: self.click_box(self.find_start_btn(box=box), after_sleep=0.25),
+            post_action=lambda: self.click_box(self.find_drop_rate_btn(), after_sleep=0.25),
             time_out=action_timeout,
             raise_if_not_found=True,
         )

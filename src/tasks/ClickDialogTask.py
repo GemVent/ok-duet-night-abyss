@@ -17,8 +17,8 @@ class ClickDialogTask(BaseDNATask, TriggerTask):
         if self.template_shape != self.frame.shape[:2]:
             self.init_box()
         rogue_dialogs = self.find_feature("rogue_dialog", box=self.rogue_dialog_box)
-        rogue_gift = self.find_one("rogue_gift", box=self.rogue_dialog_box)
-        if (len(rogue_dialogs) == 1 and not rogue_gift):
+        rogue_gift = self.find_feature("rogue_gift", box=self.rogue_dialog_box)
+        if (len(rogue_dialogs) == 1 and not len(rogue_gift) == 0):
             self.click_box(rogue_dialogs)
 
     def init_box(self):
