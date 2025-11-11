@@ -4,12 +4,13 @@ import random
 
 from ok import Logger, TaskDisabledException
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
+from src.tasks.BaseCombatTask import BaseCombatTask
 from src.tasks.CommissionsTask import CommissionsTask, Mission
 
 logger = Logger.get_logger(__name__)
 
 
-class AutoExpulsion(DNAOneTimeTask, CommissionsTask):
+class AutoExpulsion(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

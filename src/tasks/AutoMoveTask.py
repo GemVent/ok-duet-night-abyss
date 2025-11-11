@@ -1,5 +1,5 @@
 from ok import TriggerTask, Logger, og
-from src.tasks.BaseCombatTask import BaseCombatTask, NotInCombatException, CharDeadException
+from src.tasks.BaseDNATask import BaseDNATask
 from src.tasks.BaseListenerTask import BaseListenerTask
 
 from pynput import mouse, keyboard
@@ -9,7 +9,7 @@ class TriggerDeactivateException(Exception):
     """停止激活异常。"""
     pass
 
-class AutoMoveTask(BaseListenerTask, BaseCombatTask, TriggerTask):
+class AutoMoveTask(BaseListenerTask, BaseDNATask, TriggerTask):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -53,9 +53,6 @@ class AutoMoveTask(BaseListenerTask, BaseCombatTask, TriggerTask):
         while self.manual_activate:
             try:
                 self.do_move()
-            except CharDeadException:
-                self.log_error(f'Characters dead', notify=True)
-                break
             except TriggerDeactivateException as e:
                 logger.info(f'auto_move_task_deactivate {e}')
                 break

@@ -3,12 +3,13 @@ import time
 
 from ok import Logger, TaskDisabledException, Box
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
+from src.tasks.BaseCombatTask import BaseCombatTask
 from src.tasks.CommissionsTask import CommissionsTask, Mission, QuickMoveTask
 
 logger = Logger.get_logger(__name__)
 
 
-class AutoDefence(DNAOneTimeTask, CommissionsTask):
+class AutoDefence(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -11,7 +11,7 @@ from src.tasks.CommissionsTask import CommissionsTask
 logger = Logger.get_logger(__name__)
 
 
-class AutoSkill(DNAOneTimeTask, CommissionsTask):
+class AutoSkill(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

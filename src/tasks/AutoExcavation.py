@@ -5,12 +5,13 @@ import re
 
 from ok import Logger, TaskDisabledException, Box, find_color_rectangles, color_range_to_bound
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
+from src.tasks.BaseCombatTask import BaseCombatTask
 from src.tasks.CommissionsTask import CommissionsTask, QuickMoveTask, Mission
 
 logger = Logger.get_logger(__name__)
 
 
-class AutoExcavation(DNAOneTimeTask, CommissionsTask):
+class AutoExcavation(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
