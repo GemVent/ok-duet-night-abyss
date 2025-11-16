@@ -1,0 +1,11 @@
+{
+    "BAR_MIN_AREA": 1200,
+    "ICON_MIN_AREA": 70,
+    "ICON_MAX_AREA": 400,
+    "CONTROL_ZONE_RATIO": 0.25,
+    "MAX_ROUNDS": 100,
+    "END_WAIT_SPACE": 1.0,
+    "MAX_START_SEC": 20.0,
+    "MAX_FIGHT_SEC": 60.0,
+    "MAX_END_SEC": 20.0
+}
